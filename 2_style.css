@@ -1,0 +1,42 @@
+body{
+    background:#1e1e1e;
+    color:white;
+    font-family:Segoe UI,sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+
+.container{
+    width:350px;
+    background:#2a2a2a;
+    padding:25px;
+    border-radius:15px;
+}
+
+h1{
+    text-align:center;
+}
+
+input{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:#00aa66;
+    color:white;
+    border:none;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+#result{
+    margin-top:20px;
+    white-space:pre-line;
+}

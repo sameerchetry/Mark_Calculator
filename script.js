@@ -1,7 +1,7 @@
 window.onload = function() {
     const saved = JSON.parse(localStorage.getItem("marks"));
 
-    if(saved){
+    if (saved) {
         document.getElementById("math").value = saved[0];
         document.getElementById("science").value = saved[1];
         document.getElementById("english").value = saved[2];
@@ -10,9 +10,9 @@ window.onload = function() {
         document.getElementById("hindi").value = saved[5];
         document.getElementById("e3").value = saved[6];
     }
-}
+};
 
-function calculate(){
+function calculate() {
 
     const marks = [
         Number(document.getElementById("math").value),
@@ -24,52 +24,86 @@ function calculate(){
         Number(document.getElementById("e3").value)
     ];
 
-    for(let i=0;i<5;i++){
-        if(marks[i] < 0 || marks[i] > 100){
+    // Validation
+    for (let i = 0; i < 5; i++) {
+        if (marks[i] < 0 || marks[i] > 100) {
             alert("First 5 subjects must be between 0 and 100");
             return;
         }
     }
 
-    if(marks[5] < 0 || marks[5] > 50){
+    if (marks[5] < 0 || marks[5] > 50) {
         alert("Hindi must be between 0 and 50");
         return;
     }
 
-    if(marks[6] < 0 || marks[6] > 50){
+    if (marks[6] < 0 || marks[6] > 50) {
         alert("English 3rd must be between 0 and 50");
         return;
     }
 
+    // Save data
     localStorage.setItem("marks", JSON.stringify(marks));
 
-    const total = marks.reduce((a,b)=>a+b,0);
-    const percentage = (total/600)*100;
+    const total = marks.reduce((a, b) => a + b, 0);
+    const percentage = (total / 600) * 100;
+
+    const subjects = [
+        "Mathematics",
+        "Science",
+        "English",
+        "Social Science",
+        "Geography",
+        "Hindi",
+        "English 3rd"
+    ];
+
+    const passMarks = [30, 30, 30, 30, 30, 15, 15];
+
+    let failedSubjects = [];
+
+    for (let i = 0; i < marks.length; i++) {
+        if (marks[i] < passMarks[i]) {
+            failedSubjects.push(subjects[i]);
+        }
+    }
 
     let division;
 
-    if(percentage >= 80)
+    if (percentage >= 80)
         division = "Distinction";
-    else if(percentage >= 75)
+    else if (percentage >= 75)
         division = "Star Mark";
-    else if(percentage >= 60)
+    else if (percentage >= 60)
         division = "First Division";
-    else if(percentage >= 40)
+    else if (percentage >= 40)
         division = "Second Division";
-    else if(percentage >= 30)
+    else if (percentage >= 30)
         division = "Third Division";
     else
         division = "Fail";
 
-    document.getElementById("result").innerText =
-        `Total Marks: ${total}/600
+    if (failedSubjects.length > 0) {
+        document.getElementById("result").innerText =
+`Total Marks: ${total}/600
 Percentage: ${percentage.toFixed(2)}%
-Division: ${division}`;
+
+RESULT: FAIL
+
+Failed Subjects:
+${failedSubjects.join("\n")}`;
+    } else {
+        document.getElementById("result").innerText =
+`Total Marks: ${total}/600
+Percentage: ${percentage.toFixed(2)}%
+
+Division: ${division}
+
+RESULT: PASS`;
+    }
 }
 
 function clearData() {
-    alert("clearData is running");
-
     localStorage.removeItem("marks");
 
     document.querySelectorAll("input").forEach(input => {
@@ -78,4 +112,3 @@ function clearData() {
 
     document.getElementById("result").innerText = "";
 }
-

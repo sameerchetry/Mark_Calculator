@@ -66,3 +66,13 @@ function calculate(){
 Percentage: ${percentage.toFixed(2)}%
 Division: ${division}`;
 }
+
+function clearData() {
+    localStorage.removeItem("marks");
+
+    document.querySelectorAll("input").forEach(input => {
+        input.value = "";
+    });
+
+    document.getElementById("result").innerText = "";
+}

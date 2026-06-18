@@ -68,6 +68,8 @@ Division: ${division}`;
 }
 
 function clearData() {
+    alert("clearData is running");
+
     localStorage.removeItem("marks");
 
     document.querySelectorAll("input").forEach(input => {
@@ -76,3 +78,4 @@ function clearData() {
 
     document.getElementById("result").innerText = "";
 }
+

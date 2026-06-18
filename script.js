@@ -13,6 +13,7 @@ window.onload = function() {
 };
 
 function calculate() {
+    alert("NEW VERSION");
 
     const marks = [
         Number(document.getElementById("math").value),
